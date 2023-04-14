@@ -27,22 +27,18 @@ class RedirectIfAuthenticated
                      // if (Auth::guard($guard)->check()) {
         //write a code for redirect in case frontend or backend when clint is logged in
 
-if($request -> is('admin')||$request->is('admin/*') ){
-    //redirect to backend\
-    return redirect(RouteServiceProvider::Admin);
-
-    }else{
-    //redirect to frontend
-    //return redirect(RouteServiceProvider::HOME);
-    //we don't have frontend now so you will redirect to backend also
-    return redirect(RouteServiceProvider::Admin);
-    }
-
-              //  }
+        if($request -> is('admin')||$request->is('admin/*') ){
+            //redirect to backend\
+            return redirect(RouteServiceProvider::Admin);
             }
-
-        }
-
-        return $next($request);
+            else{
+            //redirect to frontend
+            //return redirect(RouteServiceProvider::HOME);
+            //we don't have frontend now so you will redirect to backend also
+            return redirect(RouteServiceProvider::Admin);
+            }
+      }
     }
+        return $next($request);   
+  }
 }

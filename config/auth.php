@@ -36,12 +36,16 @@ return [
     */
 
     'guards' => [
+        //if you don't write any guard, the default gaurd will applied on 'web' you can change
+        // this default from the upper code
         'web' => [
             'driver' => 'session',
+            //provider is the table name in the database
             'provider' => 'users',
         ],
         'admin' => [
             'driver' => 'session',
+            //provider is the table name in the database
             'provider' => 'admin',
         ],
     ],
@@ -70,7 +74,8 @@ return [
         ],
         'admin' => [
             'driver' => 'eloquent',
-            'model' => App\Models\admin::class,
+            // the name of the model in vs code
+            'model' => App\Models\Admin::class,
         ],
 
         // 'users' => [

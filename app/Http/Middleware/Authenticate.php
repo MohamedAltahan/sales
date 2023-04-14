@@ -14,18 +14,18 @@ class Authenticate extends Middleware
      */
     protected function redirectTo($request)
     {
-        if (! $request->expectsJson()) {
+        if (!$request->expectsJson()) {
             //if the request is coming from backend'admin'
-            if($request -> is('admin')||$request->is('admin/*') ){
+            if ($request->is('admin') || $request->is('admin/*')) {
                 //redirect to admin login
                 return route('admin.showlogin');
-//if the request is coming from any thing else backend'admin'
-            }else{
-//redirect to frontend page
-//return route('login');
-//now we don't have frontend so you will be routed to backend also
+                //if the request is coming from any thing else backend'admin'
+            } else {
+                //redirect to frontend page
+                //return route('login');
+                //now we don't have frontend so you will be routed to backend also
 
-return route('admin.showlogin');
+                return route('admin.showlogin');
             }
         }
     }
