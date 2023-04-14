@@ -38,7 +38,7 @@ class Admin_panel_settingsController extends Controller
     }
 
 
-    public function update(Admin_panel_setting_Request $request) 
+    public function update(Admin_panel_setting_Request $request)
     {
         try {
 
@@ -73,3 +73,4 @@ class Admin_panel_settingsController extends Controller
         }
     }
 }
+ 
