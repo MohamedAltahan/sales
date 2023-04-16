@@ -14,7 +14,7 @@ class Admin_panel_settingsController extends Controller
 {
 
     public function index()
-    {
+    { 
         //get the com_code of the user that is logged in now using this quiry "(auth()->user()->com_code)"
         //after getting the com_code (EX=1) then go to "Admin_panel_setting" table and search by this com_code that you get
         //and return the first record found "first()"
@@ -73,4 +73,3 @@ class Admin_panel_settingsController extends Controller
         }
     }
 }
- 
