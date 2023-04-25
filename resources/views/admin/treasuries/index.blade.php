@@ -22,7 +22,6 @@
                     <div class="col-md-4">
                         <input type="text" id="search_by_text" placeholder="بحث بالاسم" class="form-control">
                         <br>
-
                     </div>
                     {{-- isset check if the variable isn't null --}}
 
