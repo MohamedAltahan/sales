@@ -10,7 +10,7 @@ use App\Http\Requests\InvUnitsRequest;
 
 class Inv_unitController extends Controller
 {
-    //=======================================index====================================================================
+    //=======================================index==============================================================
     // index is the first page you will see when you enter the treasuries page(alkhazna)
     public function index()
     {
@@ -173,15 +173,41 @@ class Inv_unitController extends Controller
     //used to make live search with the help of jquary
     public function ajax_search(Request $request)
     {
-        dd($request->search_by_text);
+
+
         if ($request->ajax()) {
             // receive the variables which come from the post
             $search_by_text = $request->search_by_text;
             $is_master_search = $request->is_master_search;
+            // if the user wants all units ,view all according to this condition
+            if ($is_master_search == 'all') {
+                $field1 = 'is_master';
+                $operator1 = '>=';
+                $value1 = '0';
+            }
+            // if the user wants a specific units ,view  according to its input
+            else {
+                $field1 = 'is_master';
+                $operator1 = '=';
+                $value1 = $is_master_search;
+            }
+
+            //  if the input is null"user didn't enter anything'
+            if ($search_by_text == null) {
+                $field2 = 'id';
+                $operator2 = '>';
+                $value2 = '0';
+            }
+            //  if the user enters anything'
+            else {
+                $field2 = "name";
+                $operator2 = "LIKE";
+                $value2 = "%{$search_by_text}%";
+            }
 
             //start to search
-            $data = Inv_units::where('name', 'like', "%{$search_by_text}%")
-                ->where('is_master', '=', $is_master_search)
+            $data = Inv_unit::where($field2, $operator2, $value2)
+                ->where($field1, $operator1, $value1)
                 ->orderBy('id', 'DESC')
                 ->paginate(PAGINATION_COUNT);
             // get addBy and updatedBy

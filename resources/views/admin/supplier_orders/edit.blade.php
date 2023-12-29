@@ -1,0 +1,137 @@
+@extends('layouts.admin')
+@section('title', ' المشتريات')
+@section('contentheader', ' حركات مخزنية ')
+@section('contentheaderlink')
+    <a href="{{ route('admin.supplier_orders.index') }}">فواتير المشتريات </a>
+@endsection
+
+@section('css')
+    <link rel="stylesheet" href="{{ asset('assets/admin/plugins/select2/css/select2.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/admin/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css') }}">
+@endsection
+@section('content')
+
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+
+                <div class="card-header">
+                    <h3 class="card-title card_title_center"> تعديل فاتورة مشتريات من مورد</h3>
+                </div>
+
+                <!-- /.card-header -->
+                <div class="card-body">
+                    {{-- isset check if the variable isn't null --}}
+
+                    <form action="{{ route('admin.supplier_orders.update', $data['id']) }}" method="post">
+                        @csrf
+                        <div class="row">
+
+                            <div class=" col-5 ">
+                                <div class="form-group">
+                                    <label> تاريخ الفاتورة </label>
+                                    <input type="date" value="{{ old('order_date', $data['order_date']) }}"
+                                        name="order_date" id="order_date" class="form-control">
+                                    @error('order_date')
+                                        <span class="text-danger">{{ $message }}</span>
+                                    @enderror
+                                </div>
+                            </div>
+
+
+                            <div class=" col-5 ">
+                                <div class="form-group">
+                                    <label> رقم الفاتورة الخاص بشركة المورد</label>
+                                    <input type="text" name="doc_no" id="doc_no"
+                                        value="{{ old('doc_no', $data['doc_no']) }}" class="form-control">
+                                    @error('doc_no')
+                                        <span class="text-danger">{{ $message }}</span>
+                                    @enderror
+                                </div>
+                            </div>
+
+                            <div class=" col-5 ">
+                                <label> بيانات المورد</label>
+                                <select name='supplier_code' class="form-control select2">
+                                    <option value="">اختار اسم المورد</option>
+                                    {{-- isset check if the variable isn't null --}}
+                                    @if (@isset($Suppliers) && !@empty($Suppliers))
+                                        @foreach ($Suppliers as $info)
+                                            {{-- if error happen when you add new secondary treasuriy keep the chosen value --}}
+                                            <option @selected(old('supplier_code', $data['supplier_code']) == $info->supplier_code) value="{{ $info->supplier_code }}">
+                                                {{ $info->name }}</option>
+                                        @endforeach
+                                    @endif
+                                </select>
+                                @error('supplier_code')
+                                    <span class="text-danger">{{ $message }}</span>
+                                @enderror
+                            </div>
+
+                            <div class="form-group col-5">
+                                <label> نوع الفاتورة </label>
+                                <select name="payment_type" id="payment_type" class="form-control">
+                                    <option value="1" @selected(old('payment_type', $data['payment_type']) == 1)> الدفع كاش</option>
+                                    <option value="2" @selected(old('payment_type', $data['payment_type']) == 2)>الدفع اجل </option>
+                                </select>
+                                @error('payment_type')
+                                    <span class="text-danger">{{ $message }}</span>
+                                @enderror
+                            </div>
+
+                            <div class=" col-5 ">
+                                <label> بيانات المخازن</label>
+                                <select name='store_id' id='store_id' class="form-control ">
+                                    <option value="">اختار المخزن الذي سيستلم</option>
+                                    {{-- isset check if the variable isn't null --}}
+                                    @if (@isset($stores) && !@empty($stores))
+                                        @foreach ($stores as $info)
+                                            {{-- if error happen when you add new secondary treasuriy keep the chosen value --}}
+                                            <option @selected(old('store_id', $data['store_id']) == $info->id) value="{{ $info->id }}">
+                                                {{ $info->name }}</option>
+                                        @endforeach
+                                    @endif
+                                </select>
+                                @error('store_id')
+                                    <span class="text-danger">{{ $message }}</span>
+                                @enderror
+                            </div>
+
+                            <div class=" col-5 ">
+                                <div class="form-group">
+                                    <label> ملاحظات </label>
+                                    <input name="notes" type="text" value="{{ old('notes', $data['notes']) }}"
+                                        id="notes" class="form-control">
+                                    @error('notes')
+                                        <span class="text-danger">{{ $message }}</span>
+                                    @enderror
+                                </div>
+                            </div>
+
+                            {{-- end row div --}}
+                        </div>
+                        <div class="text-center">
+                            <button button class="btn btn-lg btn-success"> تعديل </button>
+                            <a href="{{ route('admin.supplier_orders.index') }}" class="btn btn-lg btn-danger">الغاء</a>
+                        </div>
+                    </form>
+                </div>
+                {{-- card body end --}}
+            </div>
+            {{-- card end --}}
+        </div>
+    </div>
+
+@endsection
+
+@section('script')
+    <script src="{{ asset('assets/admin/plugins/select2/js/select2.full.min.js') }}"></script>
+
+    <script>
+        //Initialize Select2 Elements
+        $('.select2').select2({
+            theme: 'bootstrap4'
+        });
+    </script>
+
+@endsection

@@ -23,22 +23,12 @@ class Admin_panel_setting_Request extends FormRequest
      */
     public function rules()
     {
-        return [
-            'system_name' => 'required',
-            'address' => 'required',
-            'phone' => 'required',
-
-
-        ];
+        return [];
     }
 
     // you can omit this function and the you will the default message in english
     public function messages()
     {
-        return [
-            'system_name.required' => 'اسم الشركة مطلوووب',
-            'address.required'  => 'عنوان الشركة مطلوووب',
-            'phone.required'  => '  رقم الموبايل مطلوب'
-        ];
+        return [];
     }
 }//class end

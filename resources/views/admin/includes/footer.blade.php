@@ -1,8 +1,12 @@
 <footer class="main-footer">
     <!-- To the right -->
-    <div class="float-right d-none d-sm-inline">
-      Anything you want
-    </div>
+    @if (request()->is('admin/salesInvoice/details*'))
+        <div>
+            <strong> شركة : {{ $footerDetails->system_name }}--</strong>
+            <strong> موبايل : {{ $footerDetails->phone }}--</strong>
+            <strong> العنوان : {{ $footerDetails->address }}</strong>
+        </div>
+    @endif
     <!-- Default to the left -->
-    <strong>Copyright &copy; 2014-2019 <a href="https://adminlte.io">AdminLTE.io</a>.</strong> All rights reserved.
-  </footer>
+    {{-- <strong>0</strong> --}}
+</footer>

@@ -29,55 +29,50 @@
                         <form action="{{ route('admin.adminpanelsetting.update') }}" method="post"
                             enctype="multipart/form-data">
                             @csrf
-                            <div class="form-group">
-                                <label>اسم الشركة</label>
-                                <input name="system_name" id="systm_name" class="form-control"
-                                    value="{{ $data['system_name'] }}" placeholder="ادخل اسم الشركه">
-                                @error('system_name')
-                                    <span class="text-danger">{{ $message }}</span>
-                                @enderror
-                            </div>
-                            <div class="form-group">
-                                <label>عنوان الشركة</label>
-                                <input name="address" id="address" class="form-control" value="{{ $data['address'] }}"
-                                    placeholder="ادخل عنوان الشركه">
-                                @error('address')
-                                    <span class="text-danger">{{ $message }}</span>
-                                @enderror
-                            </div>
-                            <div class="form-group">
-                                <label>هاتف الشركة</label>
-                                <input name="phone" id="phone" class="form-control" value="{{ $data['phone'] }}"
-                                    placeholder="ادخل هاتف الشركه">
-                                @error('phone')
-                                    <span class="text-danger">{{ $message }}</span>
-                                @enderror
-                            </div>
-                            <div class="form-group">
-                                <label>رساله تنبيه اعلى الشاشه </label>
-                                <input name="general_alert" id="general_alert" class="form-control"
-                                    value="{{ $data['general_alert'] }}" placeholder="رساله تنبيه اعلى الشاشه ">
-                            </div>
+                            {{-- --------------------------------------بيانات المقاسات والاسعار------------------------------------- --}}
 
-                            <div class="form-group">
-                                <label> شعار الشركه</label>
-                                <div>
-                                    <img class="custom_img" src="{{ asset('assets/admin/uploads') . '/' . $data['photo'] }}"
-                                        alt="لوجو">
-                                    {{-- <button type="button" class="btn btn-sm btn-danger" id="update_image">تغير
-                                        الصوره</button>
-                                    <button type="button" class="btn btn-sm btn-danger" style="display: none"
-                                        id="cancel_update_image">الغاء</button> --}}
+                            <div class=" col-md-12 text-center">
+                                <h4 class=" btn-info p-1">بيانات الشركة</h4>
+                            </div>
+                            <div class="row">
+
+
+                                <div class="form-group col-3">
+                                    <label>اسم الشركة</label>
+                                    <input name="system_name" id="systm_name" class="form-control"
+                                        value="{{ $data['system_name'] }}" placeholder="ادخل اسم الشركه">
+                                    @error('system_name')
+                                        <span class="text-danger">{{ $message }}</span>
+                                    @enderror
+                                </div>
+
+                                <div class="form-group col-5">
+                                    <label>عنوان الشركة</label>
+                                    <input name="address" id="address" class="form-control" value="{{ $data['address'] }}"
+                                        placeholder="ادخل عنوان الشركه">
+                                    @error('address')
+                                        <span class="text-danger">{{ $message }}</span>
+                                    @enderror
+                                </div>
+
+                                <div class="form-group col-4">
+                                    <label>هاتف الشركة</label>
+                                    <input name="phone" id="phone" class="form-control" value="{{ $data['phone'] }}"
+                                        placeholder="ادخل هاتف الشركه">
+                                    @error('phone')
+                                        <span class="text-danger">{{ $message }}</span>
+                                    @enderror
                                 </div>
                             </div>
-                            <div id='oldimage'>
-                                '<br> <input type="file" class="form-control" name="photo" id="photo"
-                                    class="btn btn-sm btn-danger">'
-                            </div>
+                            {{-- --------------------------------------بيانات المقاسات والاسعار------------------------------------- --}}
+
+
+
+
                 </div>
 
 
-                <div class="col-md-12 text-center">
+                <div class="col-md-12 text-center mb-2">
                     <button button class="btn btn-lg btn-success">تعديل</button>
                 </div>
                 </form>

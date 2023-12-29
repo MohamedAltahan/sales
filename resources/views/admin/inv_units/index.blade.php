@@ -21,26 +21,11 @@
                 </div>
                 <!-- /.card-header -->
                 <div class="card-body">
-                         {{-- ajax search --}}
-                         <div class="row">
-                        <div class="col-md-4">
-                            <label> اسم الوحدة </label>
-                            <input type="text" id="search_by_text" placeholder="بحث بالاسم" class="form-control">
-                            <br>
-                        </div>
 
-                        <div class="form-group col-md-4">
-                            <label> نوع الوحدة </label>
-                            <select name="is_master_search" id="is_master_search" class="form-control">
-                                <option value="all">الكل</option>
-                                <option  value="1">واحدة اساسية</option>
-                                <option value="0">وحدة تجزئة</option>
-                            </select>
-                        </div>
-                         </div>
+
                     {{-- isset check if the variable isn't null --}}
                     <div id="ajax_search_div">
-                        @if (@isset($data) && !@empty($data))
+                        @if (@count($data))
                             @php
                                 $i = 1;
                             @endphp
@@ -48,8 +33,6 @@
                                 <thead class="custom_thead">
                                     <th>مسلسل </th>
                                     <th>اسم الوحدة</th>
-                                    <th>نوع الوحدة</th>
-                                    <th>حالة التفعيل</th>
                                     <th>تاريخ الاضافة</th>
                                     <th> تاريخ التحديث </th>
                                     <th></th>
@@ -61,20 +44,6 @@
 
                                             <td>{{ $i }}</td>
                                             <td>{{ $info->name }}</td>
-                                            <td>
-                                                @if ($info->is_master == 1)
-                                                    وحدة اساسية
-                                                @else
-                                                    وحدة تجزيئة
-                                                @endif
-                                            </td>
-                                            <td>
-                                                @if ($info->active == 1)
-                                                    مفعل
-                                                @else
-                                                    معطل
-                                                @endif
-                                            </td>
 
                                             <td>
                                                 {{ $info['created_at'] }}

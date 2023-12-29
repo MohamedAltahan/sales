@@ -25,8 +25,7 @@ class InvUnitsRequest extends FormRequest
     {
         return [
             'name' => 'required',
-            'active' => 'required',
-            'is_master' => 'required'
+
         ];
     }
 
@@ -34,8 +33,6 @@ class InvUnitsRequest extends FormRequest
     {
         return [
             'name.required' => 'اسم الوحدة مطلوب',
-            'active.required'  =>  ' تفعيل الوحدة مطلوب' ,
-            'is_master.required'  =>  'نوع الوحدة مطلوب',
 
         ];
     }

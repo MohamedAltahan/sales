@@ -10,7 +10,7 @@ use App\Http\Requests\SalesMatrialTypesRequest;
 
 class Sales_matrial_typesController extends Controller
 {
-  //=======================================index======================================================================
+    //=======================================index======================================================================
     // index is the first page you will see when you enter the treasuries page(alkhazna)
     public function index()
     {
@@ -37,8 +37,6 @@ class Sales_matrial_typesController extends Controller
         return view('admin.sales_matrial_types.create');
     }
     //===========================================end create==================================================================
-    //========================================================edit ===========================================================
-    // used to edit the treasuries info
     //===========================================store======================================================================
     // store the entered data in the 'creat form' in the database
     public function store(SalesMatrialTypesRequest $request)
@@ -82,88 +80,90 @@ class Sales_matrial_typesController extends Controller
     }
     //========================================================end store=======================================================
 
-//========================================================edit ===========================================================
-// used to edit the treasuries info
-public function edit($id)
-{
-    $data = sales_matrial_types::select()->find($id);
-    //return with an array named 'data'
-    return view('admin.sales_matrial_types.edit', ['data' => $data]);
-}
-//=======================================================end edit=========================================================
+    //========================================================edit ===========================================================
+    // used to edit the treasuries info
+    public function edit($id)
+    {
+        $data = sales_matrial_types::select()->find($id);
+        //return with an array named 'data'
+        return view('admin.sales_matrial_types.edit', ['data' => $data]);
+    }
+    //=======================================================end edit=========================================================
 
-  //store the date in the database after the user edit it
-  public function update($id, SalesMatrialTypesRequest $request)
-  {
-      try {
-          $com_code = auth()->user()->com_code;
-          //get the data from the table using "select()" of the the id using "find()"
-          $data = sales_matrial_types::select()->find($id);
-          //if we don't find this id
-          if (empty($data)) {
-              return redirect()
-                  ->route('admin.sales_matrial_typess.index')
-                  ->with(['error' => 'غير قادر على الوصول للبيانات']);
-          }
-          //check name existance
-          $checkExists = sales_matrial_types::where(['name' => $request->name, 'com_code' => $com_code])
-          // if there is anothr item with the same name and the same id it means it's repeated
-              ->where('id', '!=', $id)
-              ->first();
-          if ($checkExists != null) {
-              return redirect()
-                  ->back()
-                  ->with(['error' => 'اسم الفئة مسجل من قبل'])
-                  ->withInput();
-          }
+    //===========================================update======================================================================
 
-          $data_to_update['name'] = $request->name;
-          $data_to_update['active'] = $request->active;
-          $data_to_update['updated_by'] = auth()->user()->id;
-          $data_to_update['updated_at'] = date('Y-m-d H:i:s');
-          sales_matrial_types::where(['id' => $id, 'com_code' => $com_code])->update($data_to_update);
-          return redirect()
-              ->route('admin.sales_matrial_types.index')
-              ->with(['success' => 'تم اضافه البيانات بنجاح']);
-      } catch (\Exception $ex) {
-          //$ex is variable which contians the erorr, and 'getMessage()' is a method to return the message error only without more details
-          return redirect()
-              ->back()
-              ->with(['error' => 'خطأ' . $ex->getMessage()])
-              ->withinput();
-      }
-  }
-  //========================================================end update===================================================
-
-//========================================delete treasuries delivery==================================================
-
-public function delete($id)
-{
-    try {
-        $sales_matrial_types_row = sales_matrial_types::find($id);
-        if (!empty($sales_matrial_types_row)) {
-            // delete returns true or false
-            $flag = $sales_matrial_types_row->delete();
-            if ($flag) {
+    //store the date in the database after the user edit it
+    public function update($id, SalesMatrialTypesRequest $request)
+    {
+        try {
+            $com_code = auth()->user()->com_code;
+            //get the data from the table using "select()" of the the id using "find()"
+            $data = sales_matrial_types::select()->find($id);
+            //if we don't find this id
+            if (empty($data)) {
+                return redirect()
+                    ->route('admin.sales_matrial_typess.index')
+                    ->with(['error' => 'غير قادر على الوصول للبيانات']);
+            }
+            //check name existance
+            $checkExists = sales_matrial_types::where(['name' => $request->name, 'com_code' => $com_code])
+                // if there is anothr item with the same name and the same id it means it's repeated
+                ->where('id', '!=', $id)
+                ->first();
+            if ($checkExists != null) {
                 return redirect()
                     ->back()
-                    ->with(['success' => 'تم الحذف بنجاح']);
+                    ->with(['error' => 'اسم الفئة مسجل من قبل'])
+                    ->withInput();
+            }
+
+            $data_to_update['name'] = $request->name;
+            $data_to_update['active'] = $request->active;
+            $data_to_update['updated_by'] = auth()->user()->id;
+            $data_to_update['updated_at'] = date('Y-m-d H:i:s');
+            sales_matrial_types::where(['id' => $id, 'com_code' => $com_code])->update($data_to_update);
+            return redirect()
+                ->route('admin.sales_matrial_types.index')
+                ->with(['success' => 'تم اضافه البيانات بنجاح']);
+        } catch (\Exception $ex) {
+            //$ex is variable which contians the erorr, and 'getMessage()' is a method to return the message error only without more details
+            return redirect()
+                ->back()
+                ->with(['error' => 'خطأ' . $ex->getMessage()])
+                ->withinput();
+        }
+    }
+    //========================================================end update===================================================
+
+    //========================================delete treasuries delivery==================================================
+
+    public function delete($id)
+    {
+        try {
+            $sales_matrial_types_row = sales_matrial_types::find($id);
+            if (!empty($sales_matrial_types_row)) {
+                // delete returns true or false
+                $flag = $sales_matrial_types_row->delete();
+                if ($flag) {
+                    return redirect()
+                        ->back()
+                        ->with(['success' => 'تم الحذف بنجاح']);
+                } else {
+                    return redirect()
+                        ->back()
+                        ->with(['error' => 'حدث خطأ ما']);
+                }
             } else {
                 return redirect()
                     ->back()
-                    ->with(['error' => 'حدث خطأ ما']);
+                    ->with(['error' => 'غير قادر على الوصول الى البيانات']);
             }
-        } else {
+        } catch (\Exception $ex) {
             return redirect()
                 ->back()
-                ->with(['error' => 'غير قادر على الوصول الى البيانات']);
+                ->with(['error' => 'خطأ' . $ex->getMessage()]);
         }
-    } catch (\Exception $ex) {
-        return redirect()
-            ->back()
-            ->with(['error' => 'خطأ' . $ex->getMessage()]);
     }
-}
 
-//========================================end delete treasuries delivery==================================================
+    //========================================end delete treasuries delivery==================================================
 } //class end

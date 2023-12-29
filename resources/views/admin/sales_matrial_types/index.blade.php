@@ -22,7 +22,7 @@
 
                     {{-- isset check if the variable isn't null --}}
                     <div id="ajax_search_div">
-                        @if (@isset($data) && !@empty($data))
+                        @if (@count($data))
                             @php
                                 $i = 1;
                             @endphp

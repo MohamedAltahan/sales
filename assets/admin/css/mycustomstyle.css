@@ -1,19 +1,19 @@
-.width30{
-    width:30%;
+.width30 {
+    width: 30%;
 }
-.float_right{
-    float:  right !important;
+.float_right {
+    float: right !important;
 }
-.custom_img{
-    width:150px;
+.custom_img {
+    width: 150px;
     height: 150px;
 }
-.card_title_center{
+.card_title_center {
     width: 100%;
     text-align: center !important;
 }
 
-.custom_thead{
+.custom_thead {
     background-color: rgb(70, 70, 231);
     color: white;
 }

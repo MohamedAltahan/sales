@@ -55,7 +55,7 @@
 
                             <select name="active" id="active" class="form-control">
                                 <option value="">اختر الحالة</option>
-                                <option  value="1"
+                                <option  selected value="1"
                                     @selected(old('active') == 1)>مفعل</option>
                                 <option value="0"
                                     @selected (old('active') == 0 and old('active') != '')>غيرمفعل</option>

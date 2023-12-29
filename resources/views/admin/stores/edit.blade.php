@@ -57,10 +57,10 @@
 
                                 <select name="active" id="active" class="form-control">
 
-                                    <option @selected(old('active') == 1) value="1">
+                                    <option @selected(old('active',$data['active']) == 1) value="1">
                                         مفعل</option>
 
-                                    <option @selected(old('active') == 0) value="0">
+                                    <option @selected(old('active',$data['active']) == 0) value="0">
                                         غيرمفعل
                                     </option>
                                 </select>

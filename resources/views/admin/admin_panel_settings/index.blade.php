@@ -21,66 +21,28 @@
                                 <td class="width30">اسم الشركه</td>
                                 <td>{{ $data['system_name'] }}</td>
                             </tr>
-                            <tr>
-                                <td class="width30">كود الشركه</td>
-                                <td>{{ $data['com_code'] }}</td>
-                            </tr>
-                            <tr>
-                                <td class="width30">حاله الشركه</td>
-                                <td>
-                                    @if ($data['active'] == 1)
-                                        مفعل
-                                    @else
-                                        معطل
-                                    @endif
-                                </td>
-                            </tr>
 
                             <tr>
                                 <td class="width30">هاتف الشركه</td>
                                 <td>{{ $data['phone'] }}</td>
                             </tr>
+
                             <tr>
                                 <td class="width30">عنوان الشركه</td>
                                 <td>{{ $data['address'] }}</td>
                             </tr>
-                            <tr>
-                                <td class="width30">رساله التنبيه للشركه</td>
-                                <td>{{ $data['general_alert'] }}</td>
-                            </tr>
-                            <tr>
-                                <td class="width30">لوجو الشركه</td>
-                                <td>
-                                    <div class="image">
-                                        <img class="custom_img"
-                                            src="{{ asset('assets/admin/uploads') . '/' . $data['photo'] }}" alt="لوجو">
-                                    </div>
-                                </td>
-                            <tr>
-                                <td class="width30">تاريخ اخر تحديث </td>
-                                <td>
-                                    @if ($data['updated_by'] > 0 and $data['updated_at'] != null)
-                                    
-                                    {{-- if you want to custom the date formate use this code --}}
-                                        {{-- @php
-                                            // $dt = new DateTime($data['updated_at']);
-                                            // $date = $dt->format('Y-m-d');
-                                            //12 hour system
-                                            // $time = $dt->format('h:i');
-                                            // $newDateTime = date('A', strtotime($time));
-                                            // $newDateTimeType = $newDateTime == 'AM' ? 'ص' : 'م';
 
-                                        @endphp --}}
-                                        {{ $data['updated_at'] }}
-                                        {{-- {{ $time }} --}}
-                                        {{-- {{ $newDateTimeType }} --}}
-                                        بواسطة
-                                        {{ $data['updated_by_admin'] }}
-                                    @else
-                                        لا يوجد تحديث
-                                    @endif
+                            <td class="width30">تاريخ اخر تحديث </td>
+                            <td>
+                                @if ($data['updated_by'] > 0 and $data['updated_at'] != null)
+                                    {{ $data['updated_at'] }}
+                                    بواسطة
+                                    {{ $data['updated_by_admin'] }}
+                                @else
+                                    لا يوجد تحديث
+                                @endif
 
-                                </td>
+                            </td>
                             </tr>
                             </tr>
                             <tr>
@@ -93,7 +55,7 @@
 
                 </div>
             </div>
-            <div class="col-md-12 text-center">
+            <div class="col-md-12 text-center mb-2 mt-2">
                 <a href="{{ route('admin.adminpanelsetting.edit') }}" class="btn btn-lg btn-success">تعديل</a>
             </div>
         </div>

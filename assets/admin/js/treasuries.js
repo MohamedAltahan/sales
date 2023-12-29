@@ -24,6 +24,7 @@ $(document).ready(function () {
             error: function () {},
         });
     });
+
     // "a" means if you click on any anchor
     $(document).on("click", " #ajax_pagination_in_search a ", function (e) {
         e.preventDefault();

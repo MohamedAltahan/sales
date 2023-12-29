@@ -26,6 +26,8 @@ class LoginController extends Controller
          'password' => $request->input('password')
       ])) {
          return redirect()->route('admin.dashboard');
+      } else {
+         return redirect()->route('admin.showlogin');
       }
    }
 
@@ -33,7 +35,7 @@ class LoginController extends Controller
    {
       auth()->logout();
       return redirect()->route('admin.showlogin');
-     }
+   }
    /*
 function make_new_admin(){
 $admin = new App\Models\Admin();
